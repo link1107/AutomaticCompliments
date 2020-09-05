@@ -31,7 +31,7 @@ try:  # Обрабатываем все возможные ошибки
 
 
     if __name__ == '__main__':  # Если это основной процесс
-        api_id = 0000000  # Telegram api_id
+        api_id = 0000000    # Telegram api_id
         api_hash = 'a9a9a9a9a9a9a9a9a9a9a9a9'  # Telegram api_hash
         defaultRecipient = 'vladimirpitun'  # Адресат по умолчанию
         defaultMinComplimentLength = '70'  # Минимальная длина комплимента по умолчанию
