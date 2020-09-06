@@ -5,7 +5,7 @@ try:  # Обрабатываем все возможные ошибки
     from telethon import TelegramClient
     from lxml import html
     from threading import Thread
-    import requests, asyncio, random, sys, traceback, re
+    import requests, random, sys, traceback, re
 
 
     def scrabThePage(page_number, return_dict):  # Функции скрабинга комплиментов со страницы сайта с комплиментами
@@ -18,14 +18,14 @@ try:  # Обрабатываем все возможные ошибки
         return_dict[page_number] = (tree.xpath('//a[@class="post-copy btn"]/@data-clipboard-text'))
 
 
-    async def message(internal_compliments, internal_api_id, internal_api_hash):  # Функция отправки сообщения
+    def message(internal_compliments, internal_api_id, internal_api_hash):  # Функция отправки сообщения
         # Инициализируем подключение
         internal_client = TelegramClient('Compliments', internal_api_id, internal_api_hash)  # Задаем параметры клиента
-        await internal_client.start()  # Подключаемся
+        internal_client.start()  # Подключаемся
         rand_compl = random.choice(
             internal_compliments)  # Выбираем случайный комплимент из списка отфильтрованных по длине комплиментов
-        await internal_client.send_message(sendToUsername, rand_compl)  # Отправляем комплимент адресату
-        await internal_client.disconnect()  # Отключаемся после отправки сообщения
+        internal_client.send_message(sendToUsername, rand_compl)  # Отправляем комплимент адресату
+        internal_client.disconnect()  # Отключаемся после отправки сообщения
         print('ОТПРАВЛЕН КОМПЛИМЕНТ: ' + str(rand_compl))  # Сообщаем в
         # консоль об отправке комплимента
 
@@ -124,7 +124,7 @@ try:  # Обрабатываем все возможные ошибки
 
         while True:  # Бесконечный цикл...
             input()  # При нажатии кнопки...
-            asyncio.run(message(compliments, api_id, api_hash))  # Отправляем комплимент с нашего аккаунта в телеграме
+            message(compliments, api_id, api_hash)  # Отправляем комплимент с нашего аккаунта в телеграме
 
 except KeyboardInterrupt:  # Исключение при становке пользователем
     print(
